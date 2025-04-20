@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Counter Project</title>
+  <style>
+    body {
+      background-color: #f0f4f8;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #value {
+      font-size: 4rem;
+      margin: 20px 0;
+      color: #444;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .decrease {
+      background-color: #ff4d4f;
+      color: white;
+    }
+
+    .increase {
+      background-color: #52c41a;
+      color: white;
+    }
+
+    .reset {
+      background-color: #1890ff;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Counter Project</h1>
+  <div id="value">0</div>
+  <div class="btn-container">
+    <button class="decrease">Decrease</button>
+    <button class="reset">Reset</button>
+    <button class="increase">Increase</button>
+  </div>
+
+  <script>
+    let count = 0;
+
+    const value = document.getElementById('value');
+    const btns = document.querySelectorAll('button');
+
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        const styles = e.currentTarget.classList;
+
+        // Update the count based on the button
+        if (styles.contains('decrease')) {
+          count--;
+        } else if (styles.contains('increase')) {
+          count++;
+        } else {
+          count = 0;
+        }
+
+        // Update the display
+        value.textContent = count;
+        if (count > 0) {
+          value.style.color = "#52c41a";
+        } else if (count < 0) {
+          value.style.color = "#ff4d4f";
+        } else {
+          value.style.color = "#444";
+        }
+
+        // Change button color on tap and reset it after delay
+        const originalColor = btn.style.backgroundColor;
+        btn.style.backgroundColor = "#000"; // tap color
+        setTimeout(() => {
+          btn.style.backgroundColor = ""; // reset to original via class
+        }, 200);
+      });
+    });
+  </script>
+
+</body>
+</html>
